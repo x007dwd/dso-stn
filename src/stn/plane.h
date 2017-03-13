@@ -5,6 +5,7 @@
 #include <pcl/ModelCoefficients.h>
 #include <pcl/common/transforms.h>
 #include <pcl/console/parse.h>
+#include <pcl/features/normal_3d.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/ply_io.h>
 #include <pcl/point_cloud.h>
@@ -52,7 +53,7 @@ public:
   int segment();
   int readPLY(const std::string &filename);
   int readPCD(const std::string &filename);
-  void seg_init(float th);
+  void seg_init(float th, int method = pcl::SACMODEL_PLANE);
   void run_seg();
   int matrix_transform(const Eigen::Affine3f &T);
 
@@ -66,10 +67,11 @@ private:
   pcl::PointIndices::Ptr inliers;
   pcl::SACSegmentation<pcl::PointXYZ> seg;
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
-
+  pcl::NormalEstimation<PointT, pcl::Normal> ne;
   vector<planePoint *> ptSet;
   int ptNum;
   float res;
+  int sacmodel_types;
   bool isNumPtEnough() { return ptNum >= PtNumTH; }
   bool isPtGood(const Vec3 &pt) { return normvec.dot(pt) < NormProductTH; }
   bool updateRes(const Vec3 &pt) { res += normvec.dot(pt); }

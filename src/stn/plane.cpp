@@ -91,8 +91,8 @@ void plane::EigenMatrix2PCLPoint(const Eigen::MatrixXd &em,
     cloud->points[i].z = em(i, 2);
   }
 }
-void plane::seg_init(float th) {
-
+void plane::seg_init(float th, int method) {
+  sacmodel_types = method;
   cloud =
       pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud<pcl::PointXYZ>);
 
@@ -101,6 +101,9 @@ void plane::seg_init(float th) {
   // Create the segmentation object
 
   // Optional
+  if (sacmodel_types == pcl::SACMODEL_NORMAL_PLANE) {
+  }
+
   seg.setOptimizeCoefficients(true);
   // Mandatory
   seg.setModelType(pcl::SACMODEL_PLANE);
@@ -112,6 +115,7 @@ void plane::seg_init(float th) {
 }
 void plane::run_seg() {
   seg.setInputCloud(cloud);
+
   seg.segment(*inliers, *coefficients);
   assert(inliers->indices.size() == 0);
 }

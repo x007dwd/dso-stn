@@ -16,8 +16,6 @@
 #include <pcl/sample_consensus/model_types.h>
 #include <pcl/segmentation/sac_segmentation.h>
 
-typedef pcl::PointXYZ PointT;
-
 // using namespace cv;
 using namespace std;
 
