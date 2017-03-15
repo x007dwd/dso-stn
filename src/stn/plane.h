@@ -51,8 +51,7 @@ public:
   void EigenMatrix2PCLPoint(const Eigen::MatrixXd &em,
                             pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
   int segment();
-  int readPLY(const std::string &filename);
-  int readPCD(const std::string &filename);
+
   void seg_init(float th, int method = pcl::SACMODEL_PLANE);
   void run_seg();
   int matrix_transform(const Eigen::Affine3f &T);

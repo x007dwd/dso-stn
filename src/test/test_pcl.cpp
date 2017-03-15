@@ -1,5 +1,6 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "stn/plane.h"
+#include "stn/point.h"
 using namespace dso;
 int main(int argc, char *argv[]) {
 
@@ -21,8 +22,9 @@ int main(int argc, char *argv[]) {
   }
 
   plane ps;
+  point pt;
   ps.seg_init(0.5);
-  ps.readPLY(argv[filenames[0]]);
+  pt.readPLY(argv[filenames[0]]);
   ps.pcl_view("test");
   char c = getchar();
   float theta = M_PI / 2;

@@ -62,6 +62,7 @@ set(dso_SOURCE_FILES
   ${PROJECT_SOURCE_DIR}/src/stn/object.cpp
   ${PROJECT_SOURCE_DIR}/src/stn/randomGenerator.cpp
   ${PROJECT_SOURCE_DIR}/src/stn/ransac.cpp
+  ${PROJECT_SOURCE_DIR}/src/stn/point.cpp
   #${PROJECT_SOURCE_DIR}/src/stn/ransac_applications.cpp
 )
 
@@ -147,10 +148,6 @@ endif()
 add_executable(test_vec ${PROJECT_SOURCE_DIR}/src/test/test_vec.cpp)
 add_executable(test_plane ${PROJECT_SOURCE_DIR}/src/test/testPlane.cpp)
 target_link_libraries(test_plane dso boost_system boost_thread cxsparse ${PCL_LIBRARIES} ${LIBZIP_LIBRARY} ${Pangolin_LIBRARIES} ${OpenCV_LIBS})
-
-
-add_executable(ppf_test ${PROJECT_SOURCE_DIR}/thirdparty/surface_matching/samples/ppf_load_match.cpp)
-target_link_libraries(ppf_test sm dso boost_system boost_thread cxsparse ${LIBZIP_LIBRARY} ${Pangolin_LIBRARIES} ${OpenCV_LIBS})
 
 
 add_executable(object_test ${PROJECT_SOURCE_DIR}/src/test/testObject.cpp)

@@ -102,11 +102,13 @@ void plane::seg_init(float th, int method) {
 
   // Optional
   if (sacmodel_types == pcl::SACMODEL_NORMAL_PLANE) {
+    seg.setModelType(pcl::SACMODEL_NORMAL_PLANE);
+  } else if (sacmodel_types == pcl::SACMODEL_PLANE) {
+    seg.setModelType(pcl::SACMODEL_PLANE);
   }
-
   seg.setOptimizeCoefficients(true);
   // Mandatory
-  seg.setModelType(pcl::SACMODEL_PLANE);
+
   seg.setMethodType(pcl::SAC_RANSAC);
   seg.setDistanceThreshold(th);
 
@@ -118,24 +120,6 @@ void plane::run_seg() {
 
   seg.segment(*inliers, *coefficients);
   assert(inliers->indices.size() == 0);
-}
-int plane::readPLY(const std::string &filename) {
-  if (pcl::io::loadPLYFile(filename.c_str(), *cloud) < 0) {
-    std::cout << "Error loading point cloud " << filename << std::endl
-              << std::endl;
-    return -1;
-  }
-  return 0;
-}
-
-int plane::readPCD(const std::string &filename) {
-  if (pcl::io::loadPCDFile(filename.c_str(), *cloud) < 0) {
-    std::cout << "Error loading point cloud " << filename << std::endl
-              << std::endl;
-    // showHelp(argv[0]);
-    return -1;
-  }
-  return 0;
 }
 
 int plane::matrix_transform(const Eigen::Affine3f &T) {

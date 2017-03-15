@@ -22,11 +22,11 @@
 */
 
 #pragma once
-
 #include "Eigen/Core"
 #include "sophus/se3.hpp"
 #include "sophus/sim3.hpp"
-
+#include <pcl/common/projection_matrix.h>
+#include <pcl/point_types.h>
 namespace dso {
 
 // CAMERA MODEL TO USE
@@ -43,6 +43,12 @@ typedef Sophus::Sim3d Sim3;
 typedef Sophus::SO3d SO3;
 
 #define CPARS 4
+
+typedef pcl::PointXYZ PointT;
+
+typedef pcl::PointCloud<pcl::PointXYZRGBA> Cloud;
+typedef Cloud::Ptr CloudPtr;
+typedef Cloud::ConstPtr CloudConstPtr;
 
 typedef Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> MatXX;
 typedef Eigen::Matrix<double, CPARS, CPARS> MatCC;
